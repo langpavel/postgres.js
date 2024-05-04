@@ -48,7 +48,7 @@ async function test(o, name, options, fn) {
       }
 
       tests[line].succeeded = true
-      process.stdout.write('✅')
+      process.stdout.write(`✅ ${name} at line ${line} succeeded\n`)
     })
     .catch(err => {
       tests[line].failed = failed = true
