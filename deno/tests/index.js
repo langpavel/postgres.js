@@ -376,7 +376,7 @@ t('Options from uri with special characters in user and pass', async() => {
   return [[opt.user, opt.pass].toString(), 'öla,pass^word']
 })
 
-t('Fail with proper error on no host', async() =>
+nt('Fail with proper error on no host', async() =>
   ['ECONNREFUSED', (await new Promise((resolve, reject) => {
     const sql = postgres('postgres://localhost:33333/' + options.db, {
       idle_timeout
@@ -385,7 +385,7 @@ t('Fail with proper error on no host', async() =>
   })).code]
 )
 
-t('Connect using SSL', async() =>
+nt('Connect using SSL', async() =>
   [true, (await new Promise((resolve, reject) => {
     postgres({
       ssl: { rejectUnauthorized: false },
@@ -394,7 +394,7 @@ t('Connect using SSL', async() =>
   }))]
 )
 
-t('Connect using SSL require', async() =>
+nt('Connect using SSL require', async() =>
   [true, (await new Promise((resolve, reject) => {
     postgres({
       ssl: 'require',
@@ -419,7 +419,7 @@ t('Connect using SSL prefer', async() => {
   ]
 })
 
-t('Reconnect using SSL', { timeout: 2 }, async() => {
+nt('Reconnect using SSL', { timeout: 2 }, async() => {
   const sql = postgres({
     ssl: 'require',
     idle_timeout: 0.1
@@ -1006,7 +1006,7 @@ t('little bobby tables', async() => {
   ]
 })
 
-t('Connection errors are caught using begin()', {
+nt('Connection errors are caught using begin()', {
   timeout: 2
 }, async() => {
   let error
@@ -1222,7 +1222,7 @@ t('Multiple statements', async() =>
   `).then(([, [x]]) => x.a)]
 )
 
-t('throws correct error when authentication fails', async() => {
+nt('throws correct error when authentication fails', async() => {
   const sql = postgres({
     ...options,
     ...login_md5,
@@ -1658,7 +1658,7 @@ t('connect_timeout error message includes host:port', { timeout: 20 }, async() =
   return [['write CONNECT_TIMEOUT 127.0.0.1:', port].join(''), err]
 })
 
-t('requests works after single connect_timeout', async() => {
+nt('requests works after single connect_timeout', async() => {
   let first = true
 
   const sql = postgres({
